@@ -1,0 +1,33 @@
+<div>
+    <div class="submit-form">
+      @if (!submitted) {
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          required
+          [(ngModel)]="listing.title"
+          name="title"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          class="form-control"
+          id="description"
+          required
+          [(ngModel)]="listing.description"
+          name="description"
+        />
+      </div>
+  
+      <button (click)="saveListing()" class="btn btn-success">Submit</button>
+      } @else {
+      <h4>Listing was submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newListing()">Add</button>
+      }
+    </div>
+  </div>
