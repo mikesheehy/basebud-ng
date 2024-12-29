@@ -1,1 +1,76 @@
-<p>listing-details works!</p>
+@if (viewMode){
+    @if (currentListing.id){
+    <h4>Listing</h4>
+    <div>
+      <label><strong>Title:</strong></label> {{ currentListing.title }}
+    </div>
+    <div>
+      <label><strong>Description:</strong></label>
+      {{ currentListing.description }}
+    </div>
+    <div>
+      <label><strong>Status:</strong></label>
+      {{ currentListing.published ? "Published" : "Pending" }}
+    </div>
+  
+    <a class="badge badge-warning" routerLink="/listings/{{ currentListing.id }}">
+      Edit
+    </a>
+    } @else {<p>Please click on a Listing...</p>}
+  } @else {
+    @if (currentListing.id) {
+    <div class="edit-form">
+      <h4>Listing</h4>
+      <form>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="currentListing.title"
+            name="title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            [(ngModel)]="currentListing.description"
+            name="description"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label><strong>Status:</strong></label>
+          {{ currentListing.published ? "Published" : "Pending" }}
+        </div>
+      </form>
+  
+      @if (currentListing.published) {
+      <button class="badge badge-primary mr-2"
+        (click)="updatePublished(false)" >
+        UnPublish
+      </button>
+      } @else {
+      <button class="badge badge-primary mr-2" (click)="updatePublished(true)">
+        Publish
+      </button>
+      }
+  
+      <button class="badge badge-danger mr-2" (click)="deleteListing()">
+        Delete
+      </button>
+  
+      <button
+        type="submit"
+        class="badge badge-success mb-2"
+        (click)="updateListing()">
+        Update
+      </button>
+      <p>{{ message }}</p>
+    </div>
+    } @else {<p>Cannot access this Listing...</p>}
+  }
